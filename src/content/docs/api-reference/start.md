@@ -42,3 +42,18 @@ app.start(process.env.PORT || 3000);
 :::note
 The `start` function attaches an error listener for common errors like `EADDRINUSE`.
 :::
+
+## Graceful Shutdown
+
+`start()` automatically enables graceful shutdown — on `SIGTERM` or `SIGINT`, the server drains connections and runs cleanup hooks before exiting.
+
+```js
+app.onShutdown(async () => {
+  await db.disconnect();
+});
+
+app.start(3000);
+// Ctrl+C → connections drain → hooks run → clean exit
+```
+
+Disable or customize via [`setConfig()`](/api-reference/set-config/). See the full [Graceful Shutdown guide](/guide/features/graceful-shutdown/) for details.

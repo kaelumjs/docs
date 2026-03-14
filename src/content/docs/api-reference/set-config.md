@@ -22,6 +22,7 @@ app.setConfig(options)
 | `bodyParser` | `boolean` | `true` | JSON + urlencoded |
 | `static` | `string \| boolean` | `false` | Static files path |
 | `views` | `Object` | — | View engine config |
+| `gracefulShutdown` | `boolean \| Object` | `true` | Shutdown handling |
 
 ## Examples
 
@@ -42,6 +43,11 @@ app.setConfig({
 
 // Toggle features off
 app.setConfig({ logs: false });
+
+// Graceful shutdown with custom timeout
+app.setConfig({
+  gracefulShutdown: { timeout: 15000, signals: ["SIGTERM"] },
+});
 ```
 
 :::tip
