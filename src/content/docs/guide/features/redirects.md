@@ -1,63 +1,51 @@
 ---
-title: Health Checks
-description: Built-in health monitoring for production apps.
+title: Redirects
+description: Simplified URL redirection with multiple syntax options.
 sidebar:
-  order: 1
+  order: 5
 ---
 
-## healthCheck()
+## redirect()
 
-Add a health check endpoint for monitoring and DevOps:
+Kaelum provides a flexible redirect helper that supports single, map, and array syntax.
 
-```js
-app.healthCheck();          // default: GET /health
-app.healthCheck("/status"); // custom path
-```
-
-### Response
-
-```json
-{
-  "status": "OK",
-  "uptime": 123.456,
-  "pid": 12345,
-  "timestamp": "2025-01-01T00:00:00.000Z"
-}
-```
-
-### With Readiness Check
+### Single Redirect
 
 ```js
-app.healthCheck({
-  readinessCheck: async () => {
-    const dbOk = await checkDatabase();
-    return { ok: dbOk };
-  }
-});
-```
-
-Returns 503 if the readiness check fails.
-
-## Redirects
-
-Simplified URL redirection:
-
-```js
-// Single redirect
 app.redirect("/old", "/new");
 
-// With status code
+// With custom status code (default: 302)
 app.redirect("/legacy", "/modern", 301);
+```
 
-// Map syntax
+### Map Syntax
+
+Redirect multiple paths at once using an object:
+
+```js
 app.redirect({
   "/old-page": "/new-page",
-  "/deprecated": "/current"
+  "/deprecated": "/current",
 });
+```
 
-// Array syntax
+All map redirects use **302** by default.
+
+### Array Syntax
+
+For fine-grained control over each redirect:
+
+```js
 app.redirect([
-  ["/a", "/b"],
-  ["/c", "/d", 301]
+  { from: "/a", to: "/b" },
+  { from: "/c", to: "/d", status: 301 },
 ]);
 ```
+
+### Safe Replacement
+
+Calling `redirect()` for a path that already has a Kaelum redirect **replaces** the previous handler — no duplicate routes.
+
+:::note
+Redirects are registered as `GET` routes. For `POST` redirects, use Express's built-in `res.redirect()` inside your handler.
+:::

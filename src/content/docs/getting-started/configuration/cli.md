@@ -61,7 +61,7 @@ Print the installed Kaelum version:
 
 ```bash
 npx kaelum --version
-# kaelum v1.8.0
+# kaelum v1.x.x
 ```
 
 ### `kaelum info`
@@ -71,7 +71,7 @@ Print environment information (useful for bug reports):
 ```bash
 npx kaelum info
 # Kaelum CLI
-#   Kaelum:   v1.8.0
+#   Kaelum:   v1.x.x
 #   Node.js:  v20.11.0
 #   OS:       Windows_NT 10.0.22631 (x64)
 #   Platform: win32

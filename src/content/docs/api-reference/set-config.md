@@ -22,6 +22,7 @@ app.setConfig(options)
 | `bodyParser` | `boolean` | `true` | JSON + urlencoded |
 | `static` | `string \| boolean` | `false` | Static files path |
 | `views` | `Object` | — | View engine config |
+| `rateLimit` | `boolean \| Object` | `false` | Rate limiting |
 | `gracefulShutdown` | `boolean \| Object` | `true` | Shutdown handling |
 
 ## Examples

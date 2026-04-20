@@ -53,6 +53,8 @@ app.setConfig({
 | `bodyParser` | `boolean` | `true` | JSON + URL-encoded parsing |
 | `static` | `string \| boolean` | `false` | Static files directory |
 | `views` | `Object` | — | View engine (`{ engine, path }`) |
+| `rateLimit` | `boolean \| Object` | `false` | Rate limiting |
+| `gracefulShutdown` | `boolean \| Object` | `true` | Shutdown handling |
 
 :::tip
 Call `setConfig()` **before** adding routes. It merges with existing config, so you can call it multiple times.
